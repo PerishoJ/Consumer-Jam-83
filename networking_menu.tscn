@@ -2,30 +2,18 @@
 
 [ext_resource type="Script" uid="uid://co1dyr7hhfmb8" path="res://networking_menu.gd" id="1_0iu1f"]
 
-[node name="Node2D" type="Node2D"]
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_right = 94.0
+offset_bottom = 66.0
 script = ExtResource("1_0iu1f")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
-layout_mode = 2
-
-[node name="Host Btn" type="Button" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Host Btn" type="Button" parent="."]
 layout_mode = 2
 text = "Host Game"
 
-[node name="Join Btn" type="Button" parent="Control/PanelContainer/VBoxContainer"]
+[node name="Join Btn" type="Button" parent="."]
 layout_mode = 2
 text = "Join Game"
 
-[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/Host Btn" to="." method="_on_host_btn_pressed"]
-[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/Join Btn" to="." method="_on_join_btn_pressed"]
+[connection signal="pressed" from="Host Btn" to="." method="_on_host_btn_pressed"]
+[connection signal="pressed" from="Join Btn" to="." method="_on_join_btn_pressed"]

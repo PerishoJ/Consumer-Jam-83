@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5710smu1oquw"]
+[gd_scene load_steps=8 format=3 uid="uid://br4rkv68dl6yq"]
 
-[ext_resource type="PackedScene" uid="uid://e328240w5sul" path="res://characters/character_basic.tscn" id="1_8uh7m"]
-[ext_resource type="Material" uid="uid://xqry12c1frvm" path="res://addons/kenney_prototype_tools/materials/green/material_05.tres" id="1_37kl0"]
+[ext_resource type="Material" uid="uid://xqry12c1frvm" path="res://addons/kenney_prototype_tools/materials/green/material_05.tres" id="2_eccqv"]
+[ext_resource type="PackedScene" uid="uid://dc64amumjnkmg" path="res://networking_menu.tscn" id="2_k1p8n"]
+[ext_resource type="Script" uid="uid://c73gy3bq2al43" path="res://scripts/networking_manager.gd" id="3_eccqv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8uh7m"]
 sky_top_color = Color(0.622333, 0.685203, 0.772828, 1)
@@ -28,8 +29,6 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ppyta")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_8uh7m")]
-
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
@@ -38,5 +37,20 @@ shape = SubResource("BoxShape3D_6uqi0")
 
 [node name="floor" type="CSGBox3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
-material_override = ExtResource("1_37kl0")
+material_override = ExtResource("2_eccqv")
 size = Vector3(17, 1, 17)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://wv7k4ooodh3e")
+spawn_path = NodePath("../Players")
+spawn_limit = 2
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="Menu" parent="." instance=ExtResource("2_k1p8n")]
+
+[node name="Network" type="Node" parent="."]
+script = ExtResource("3_eccqv")
+
+[connection signal="host" from="Menu" to="Network" method="host_game"]
+[connection signal="join" from="Menu" to="Network" method="join_game"]

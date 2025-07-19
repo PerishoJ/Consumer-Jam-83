@@ -14,9 +14,10 @@ config/name="Consume Jam 83"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
+[display]
 
-NetworkingManager="*res://scripts/networking_manager.gd"
+window/size/always_on_top=true
+window/subwindows/embed_subwindows=false
 
 [input]
 
