@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://c5710smu1oquw"]
+
+[ext_resource type="Material" uid="uid://xqry12c1frvm" path="res://addons/kenney_prototype_tools/materials/green/material_05.tres" id="1_37kl0"]
+[ext_resource type="Script" uid="uid://cfhq6q04ri5q8" path="res://scripts/character_controller.gd" id="2_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://bpstpojeja0au" path="res://kenney_mini_characters/Models/GLB format/character-male-f.glb" id="2_8uh7m"]
+[ext_resource type="Script" uid="uid://3pycp27qq5jc" path="res://camera_focus.gd" id="3_ppyta"]
+[ext_resource type="Script" uid="uid://cpvd5p1qlnbis" path="res://lock_mouse.gd" id="4_ykrsh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8uh7m"]
+sky_top_color = Color(0.622333, 0.685203, 0.772828, 1)
+sky_horizon_color = Color(0.914808, 0.922775, 0.935682, 1)
+ground_horizon_color = Color(0.914808, 0.922775, 0.935682, 1)
+
+[sub_resource type="Sky" id="Sky_6uqi0"]
+sky_material = SubResource("ProceduralSkyMaterial_8uh7m")
+
+[sub_resource type="Environment" id="Environment_ppyta"]
+background_mode = 2
+sky = SubResource("Sky_6uqi0")
+tonemap_mode = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
+radius = 0.219054
+height = 0.695162
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6uqi0"]
+size = Vector3(16.8804, 1, 16.942)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ppyta")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("2_6uqi0")
+player = NodePath("CharacterMesh/character-male-f2/AnimationPlayer")
+
+[node name="CharacterMesh" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="character-male-f2" parent="CharacterBody3D/CharacterMesh" instance=ExtResource("2_8uh7m")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="CharacterBody3D/CharacterMesh/character-male-f2/character-male-f" index="0"]
+bones/4/rotation = Quaternion(0, 0, -0.382683, 0.92388)
+bones/5/rotation = Quaternion(0, 0, 0.382683, 0.92388)
+
+[node name="CameraFocus" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609468, 0)
+script = ExtResource("3_ppyta")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/CameraFocus"]
+spring_length = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraFocus/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 3)
+
+[node name="LockMouse" type="Node" parent="CharacterBody3D/CameraFocus"]
+script = ExtResource("4_ykrsh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.359377, 0)
+shape = SubResource("CapsuleShape3D_ppyta")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03385, -1, -0.0155334)
+shape = SubResource("BoxShape3D_6uqi0")
+
+[node name="floor" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+material_override = ExtResource("1_37kl0")
+size = Vector3(17, 1, 17)
+
+[editable path="CharacterBody3D/CharacterMesh/character-male-f2"]
