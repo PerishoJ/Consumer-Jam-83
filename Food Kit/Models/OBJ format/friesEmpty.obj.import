@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cckrejvnidprh"
+path="res://.godot/imported/friesEmpty.obj-fb8ede0e77b1eda82821cc3016da08bf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/friesEmpty.obj-fb8ede0e77b1eda82821cc3016da08bf.mesh"]
+
+source_file="res://Food Kit/Models/OBJ format/friesEmpty.obj"
+dest_files=["res://.godot/imported/friesEmpty.obj-fb8ede0e77b1eda82821cc3016da08bf.mesh", "res://.godot/imported/friesEmpty.obj-fb8ede0e77b1eda82821cc3016da08bf.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

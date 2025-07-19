@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bxc4v5i4ykmek"
+path="res://.godot/imported/hotDogRaw.obj-2c4530d6c14da2f76fccc604b3e8ef48.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hotDogRaw.obj-2c4530d6c14da2f76fccc604b3e8ef48.mesh"]
+
+source_file="res://Food Kit/Models/OBJ format/hotDogRaw.obj"
+dest_files=["res://.godot/imported/hotDogRaw.obj-2c4530d6c14da2f76fccc604b3e8ef48.mesh", "res://.godot/imported/hotDogRaw.obj-2c4530d6c14da2f76fccc604b3e8ef48.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
