@@ -7,6 +7,8 @@ var SERVER_IP = "127.0.0.1" # loopback. Localhost
 var multiplayer_scene = preload("res://characters/network_character.tscn")
 var _player_spawn_scene
 
+@export var main_cam : Camera3D
+
 var is_ = false;
 
 func _ready():
@@ -15,6 +17,10 @@ func _ready():
     match arg:
       "--server":
         host_game()
+        $"../Menu".visible=false
+      "--client":
+        $ClientDelay.start(randf())
+        $"../Menu".visible=false
 
 func host_game():
   #TODO Set this up for Web Sockets
@@ -30,14 +36,13 @@ func host_game():
   # get reference to the spawn node
   # Something about, this needs to happen EVERY game, so this might not even be the right place to put this code...whatever.
   _player_spawn_scene = get_tree().get_current_scene().get_node("Players")
-  _add_player_to_server(1)
-  
+  #_add_player_to_server(1)
   
   
 func join_game():
   var client_peer = ENetMultiplayerPeer.new();
   #var client_peer= WebSocketMultiplayerPeer.new();
-  var err: Error = client_peer.create_client(SERVER_IP,SERVER_PORT)
+  var err: Error = client_peer.create_client(SERVER_IP, SERVER_PORT)
   #var err: Error = client_peer.create_client(WEBSOCKET_URL)
   if err != null and err!=0:
     print(err)
@@ -49,7 +54,9 @@ func _add_player_to_server(id : int):
   print("Player %s joined " % id)
   var new_player = multiplayer_scene.instantiate()
   new_player.player_id = id
-  new_player.set_name ( str(id) ) # 
+  new_player.name = (str(id))
+  new_player.position.x = randf_range(0,10);
+  new_player.position.z = randf_range(0,10);
   _player_spawn_scene.add_child(new_player)
   
 func _delete_player(id :int ):

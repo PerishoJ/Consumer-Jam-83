@@ -15,3 +15,6 @@ func _input(event):
   if event is InputEventMouseMotion:
     rotate_y ( event.relative.x * MOUSE_SENSITIVITY) # rotate left/right
     spring_arm.rotate_x ( clampf( event.relative.y * MOUSE_SENSITIVITY , -0.7 , 0.7) ) # rotate up/down
+
+func add_camera( cam : Camera3D ):
+  spring_arm.add_child(cam)

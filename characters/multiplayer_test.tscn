@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://c21lbw2aiq0o3"]
+
+[ext_resource type="Script" uid="uid://clbhoiqbdljwm" path="res://characters/multiplayer_test_II.gd" id="1_j6pml"]
+[ext_resource type="Script" uid="uid://3pycp27qq5jc" path="res://camera_focus.gd" id="2_j6pml"]
+[ext_resource type="Script" uid="uid://cpvd5p1qlnbis" path="res://lock_mouse.gd" id="3_7gulu"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vqswn"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j6pml"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vqswn"]
+
+[node name="Node3D" type="CharacterBody3D"]
+script = ExtResource("1_j6pml")
+
+[node name="LocSync" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_vqswn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_j6pml")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_vqswn")
+
+[node name="CameraFocus" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609468, 0)
+script = ExtResource("2_j6pml")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraFocus"]
+spring_length = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraFocus/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 3)
+
+[node name="LockMouse" type="Node" parent="CameraFocus"]
+script = ExtResource("3_7gulu")
+enabled = false

@@ -1,13 +1,13 @@
 extends CharacterBody3D
-
+class_name NetworkedCharacter
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
-@export var player_id := 1: # default to server ID
+@export var player_id := 1 : # default to server ID
   set(id): # Setter for authority problems
     print("setting player id to " + str(id))
-    if(player_id == 1):
+    if( player_id == 1):
         print ("congrats! You're the server")
     player_id = id
     $InputSynchronizer.set_multiplayer_authority(id)
@@ -24,7 +24,10 @@ var anim : animation_state = animation_state.IDLE
 func _physics_process(delta):
   if multiplayer.is_server():
     _apply_movement_from_input(delta)
-     
+  elif is_multiplayer_authority():
+    var cam = get_tree().current_scene.find_child("MainCamera");
+    set_camera(cam)
+  
 func _apply_movement_from_input(delta):
   # Add the gravity.
   if not is_on_floor():
@@ -59,3 +62,6 @@ func _handle_avatar(delta):
       player.play("idle")
     animation_state.JUMP:
       player.play("jump")
+
+func set_camera(cam):
+  cam.reparent($CameraFocus/SpringArm3D)
