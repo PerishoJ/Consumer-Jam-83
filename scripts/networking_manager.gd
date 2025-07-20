@@ -9,6 +9,13 @@ var _player_spawn_scene
 
 var is_ = false;
 
+func _ready():
+  var args = OS.get_cmdline_args()
+  for arg in args:
+    match arg:
+      "--server":
+        host_game()
+
 func host_game():
   #TODO Set this up for Web Sockets
 #  This simple stuff ACTUALLY should make a server
