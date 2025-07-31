@@ -17,8 +17,6 @@ func network_init(id : int):
   position.z = randf_range(0,7)
   name = str(id)
   print( "Spawning player with id " + str(id))
-  # need to give the player authority to send move commnds
-  set_multiplayer_authority(id)
 
 func _ready():
   print("Character with name "  + name + "spawned in")

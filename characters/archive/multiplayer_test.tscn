@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c21lbw2aiq0o3"]
 
-[ext_resource type="Script" uid="uid://clbhoiqbdljwm" path="res://characters/multiplayer_test_II.gd" id="1_j6pml"]
+[ext_resource type="Script" uid="uid://clbhoiqbdljwm" path="res://characters/archive/multiplayer_test_II.gd" id="1_j6pml"]
 [ext_resource type="Script" uid="uid://3pycp27qq5jc" path="res://camera_focus.gd" id="2_j6pml"]
 [ext_resource type="Script" uid="uid://cpvd5p1qlnbis" path="res://lock_mouse.gd" id="3_7gulu"]
 

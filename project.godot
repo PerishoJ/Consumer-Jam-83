@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Consume Jam 83"
-run/main_scene="uid://b8u1hp2vak1mj"
+run/main_scene="uid://wiosqknjr5o6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameGlobals="*res://levels/multiplayer_III/game_globals.gd"
 
 [display]
 

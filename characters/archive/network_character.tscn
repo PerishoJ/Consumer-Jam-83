@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://wv7k4ooodh3e"]
 
-[ext_resource type="Script" uid="uid://da274y273xoxp" path="res://scripts/network_character_controller.gd" id="1_aqmpk"]
+[ext_resource type="Script" uid="uid://da274y273xoxp" path="res://scripts/archive/network_character_controller.gd" id="1_aqmpk"]
 [ext_resource type="PackedScene" uid="uid://bpstpojeja0au" path="res://kenney_mini_characters/Models/GLB format/character-male-f.glb" id="2_m0kbo"]
 [ext_resource type="Script" uid="uid://3pycp27qq5jc" path="res://camera_focus.gd" id="3_64ym1"]
 [ext_resource type="Script" uid="uid://cpvd5p1qlnbis" path="res://lock_mouse.gd" id="4_ty4it"]
-[ext_resource type="Script" uid="uid://cgufae6hkjlpp" path="res://scripts/multiplayer_input.gd" id="5_m0kbo"]
+[ext_resource type="Script" uid="uid://cgufae6hkjlpp" path="res://scripts/archive/multiplayer_input.gd" id="5_m0kbo"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_64ym1"]
 properties/0/path = NodePath("InputSynchronizer:input_direction")

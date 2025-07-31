@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cj1km8xvke685"]
+
+[node name="Credits" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="weird burrito picture" type="Label" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(680, 0)
+layout_direction = 2
+layout_mode = 2
+text = "ID <a href=\"https://www.dreamstime.com/humorous-cartoon-illustration-depicting-slice-pizza-distress-being-consumed-large-burrito-has-terrified-expression-image389559485\">389559485</a> @ <a href=\"https://www.dreamstime.com/agungsetya_info\">Agung Setya</a> | <a href=\"https://www.dreamstime.com/stock-photos\">Dreamstime.com</a>"
+autowrap_mode = 2
+
+[node name="Tomato crowd picture at front" type="Label" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(680, 0)
+layout_direction = 2
+layout_mode = 2
+text = "ID <a href=\"https://www.dreamstime.com/stock-illustration-crowd-silhouette-having-fun-tomato-throwing-festival-vector-illustration-banner-red-tomatoes-each-other-image98831274\">98831274</a> @ <a href=\"https://www.dreamstime.com/penwin_info\">Penwin</a> | <a href=\"https://www.dreamstime.com/\">Dreamstime.com</a>"
+autowrap_mode = 2

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://j0ar7vvanvej"]
+
+[ext_resource type="Script" uid="uid://dh5tc2pi43la2" path="res://ClientAuthMultiplayer/owner_tag.gd" id="1_5ej7i"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_5ej7i")

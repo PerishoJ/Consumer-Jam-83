@@ -5,7 +5,7 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
   if(enabled):
-    if (player as NetCharacterCtrl).peer_id == multiplayer.get_unique_id():
+    if is_multiplayer_authority():
       Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     else:
       set_process_input(false)

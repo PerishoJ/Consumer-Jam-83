@@ -1,0 +1,123 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxncvvfj4ekkk"]
+
+[ext_resource type="Material" uid="uid://xqry12c1frvm" path="res://addons/kenney_prototype_tools/materials/green/material_05.tres" id="1_veiuc"]
+[ext_resource type="Script" uid="uid://dn4aymfws8mvj" path="res://scripts/multiplayer/network_manager.gd" id="1_xuvd0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8uh7m"]
+sky_top_color = Color(0.622333, 0.685203, 0.772828, 1)
+sky_horizon_color = Color(0.914808, 0.922775, 0.935682, 1)
+ground_horizon_color = Color(0.914808, 0.922775, 0.935682, 1)
+
+[sub_resource type="Sky" id="Sky_6uqi0"]
+sky_material = SubResource("ProceduralSkyMaterial_8uh7m")
+
+[sub_resource type="Environment" id="Environment_ppyta"]
+background_mode = 2
+sky = SubResource("Sky_6uqi0")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6uqi0"]
+size = Vector3(16.8804, 1, 16.942)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://drj5276plhc72")
+spawn_path = NodePath("Players")
+spawn_limit = 2
+script = ExtResource("1_xuvd0")
+
+[node name="Players" type="Node3D" parent="MultiplayerSpawner"]
+
+[node name="DefltCamLoc" type="Node3D" parent="MultiplayerSpawner"]
+transform = Transform3D(0.699663, -0.445745, 0.558375, 0, 0.78152, 0.62388, -0.714473, -0.436506, 0.546801, 8.001, 6.8, 9.015)
+
+[node name="MainCamera" type="Camera3D" parent="MultiplayerSpawner/DefltCamLoc"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, -1.49012e-08, 2.98023e-08, 1.49012e-08, 1, 0, 0, 0)
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ppyta")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03385, -1, -0.0155334)
+shape = SubResource("BoxShape3D_6uqi0")
+
+[node name="floor" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+material_override = ExtResource("1_veiuc")
+size = Vector3(17, 1, 17)
+
+[node name="ServerLabel" type="Label" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.048
+offset_left = -55.0
+offset_top = 21.0
+offset_right = 53.0
+offset_bottom = 20.96
+grow_horizontal = 2
+text = "SERVER NODE"
+
+[node name="ServerLabel" type="Label" parent="ServerLabel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.048
+offset_left = -55.0
+offset_top = 21.0
+offset_right = 53.0
+offset_bottom = 20.96
+grow_horizontal = 2
+text = "SERVER NODE"
+
+[node name="ServerLabel" type="Label" parent="ServerLabel/ServerLabel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.048
+offset_left = -55.0
+offset_top = 21.0
+offset_right = 53.0
+offset_bottom = 20.96
+grow_horizontal = 2
+text = "SERVER NODE"
+
+[node name="ServerLabel" type="Label" parent="ServerLabel/ServerLabel/ServerLabel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.048
+offset_left = -55.0
+offset_top = 21.0
+offset_right = 53.0
+offset_bottom = 20.96
+grow_horizontal = 2
+text = "SERVER NODE"
+
+[node name="ServerLabel" type="Label" parent="ServerLabel/ServerLabel/ServerLabel/ServerLabel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.048
+offset_left = -55.0
+offset_top = 21.0
+offset_right = 53.0
+offset_bottom = 20.96
+grow_horizontal = 2
+text = "SERVER NODE"

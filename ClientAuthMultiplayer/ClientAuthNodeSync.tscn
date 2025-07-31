@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0ckyi5g3mcgq"]
+
+[ext_resource type="Script" uid="uid://cospcoj8ggson" path="res://ClientAuthMultiplayer/client_auth_node_sync.gd" id="1_vmi6j"]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner"]
+spawn_path = NodePath(".")
+script = ExtResource("1_vmi6j")

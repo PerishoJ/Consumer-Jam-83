@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxynyttfhbvhv"]
+
+[ext_resource type="Texture2D" uid="uid://lncjljvmni7w" path="res://levels/crowd-silhouette-having-fun-tomato-throwing-festival-vector-illustration-banner-red-tomatoes-each-other-98831274.webp" id="1_kblx5"]
+[ext_resource type="Script" uid="uid://5n2763h806gf" path="res://levels/loading_screen.gd" id="1_p5h07"]
+
+[sub_resource type="Theme" id="Theme_p5h07"]
+default_font_size = 34
+
+[node name="IntroMenu" type="Node2D"]
+script = ExtResource("1_p5h07")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Crowd-silhouette-having-fun-tomato-throwing-festival-vector-illustration-banner-red-tomatoes-each-other-98831274" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(350, 232)
+texture = ExtResource("1_kblx5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -307.0
+offset_top = -127.0
+offset_right = 307.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_p5h07")
+text = "Food Frenzy!
+Dash to the Finish"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Player Name"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join Game"
+text_overrun_behavior = 2
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer/JoinButton" to="." method="_load_game"]
