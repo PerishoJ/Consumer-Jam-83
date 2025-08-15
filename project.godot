@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Consume Jam 83"
-run/main_scene="uid://wiosqknjr5o6"
+run/main_scene="uid://jmryy1vwdujq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,12 +19,21 @@ config/icon="res://icon.svg"
 
 GameGlobals="*res://levels/multiplayer_III/game_globals.gd"
 
+[debug]
+
+gdscript/warnings/property_used_as_function=2
+
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=480
 window/size/always_on_top=true
 window/subwindows/embed_subwindows=false
+window/per_pixel_transparency/allowed=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/property_selection_window/plugin.cfg")
 
 [input]
 
