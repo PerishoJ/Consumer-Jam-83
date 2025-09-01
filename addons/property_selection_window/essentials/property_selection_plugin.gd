@@ -25,7 +25,7 @@ class MyPropertySelectorPlugin extends EditorInspectorPlugin:
     if hint_text == "PropertySelectorNode":
       var property_editor = preload("res://addons/property_selection_window/essentials/property_selector_editor.gd").new()
       property_editor.add_root_node(object, path)
-      add_property_editor(path, property_editor, ADD_TO_END, "Picker")
+      add_property_editor(path, property_editor, ADD_TO_END, "Choose...")
       # TODO you should probably just use a Node. Resources are a PITA...
       return false
     else:

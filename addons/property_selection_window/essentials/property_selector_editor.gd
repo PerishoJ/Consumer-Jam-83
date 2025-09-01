@@ -8,8 +8,9 @@ var root : Node
 var prop_name : String
 func _init():
   select_button = Button.new();
-  select_button.text = "choose properties"
-  select_button.modulate = Color(0.2, 0.5, 1.0)
+  select_button.text = "Property Menu"
+  # Make the button blue, or you just don't notice it
+  select_button.modulate = Color(0.63, 0.89, 1.00)
   select_button.pressed.connect(_open_prop_select_window)
   add_child(select_button)
   pass
@@ -21,8 +22,6 @@ func add_root_node( root , prop_name):
 
 func _open_prop_select_window():
   # we should be currently editing the PropertyPath object, whose list SHOULD contain all the properties we just selected
-  print("Prop: " + get_edited_property())
-  print("Obj: " + str( get_edited_object()))
   if(get_edited_object() != null):
     var selector_node :PropertySelectorNode = root.get(prop_name) 
     if not selector_node:
