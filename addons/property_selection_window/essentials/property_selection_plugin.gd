@@ -1,10 +1,33 @@
 @tool
 extends EditorPlugin
 
+var plugin
 
 func _enter_tree() -> void:
+  # we'll use preload instead of classnames to avoid namespace collisions
+  #plugin = preload("res://addons/property_selection_window/essentials/editor_inspector_plugin.gd").new()
+  plugin = MyPropertySelectorPlugin.new()
+  add_inspector_plugin(plugin)
+  print("Adding Property Selector Plugin")
   pass
-
 
 func _exit_tree() -> void:
+  remove_inspector_plugin(plugin)
   pass
+
+class MyPropertySelectorPlugin extends EditorInspectorPlugin:
+  const ADD_TO_END: bool = true
+  func _can_handle(object):
+    # Need to reference both the object containing the property(NODE)
+    return object is Node
+  
+  func _parse_property(object, type, path, hint, hint_text, usage, wide):
+    if hint_text == "PropertySelectorNode":
+      var property_editor = preload("res://addons/property_selection_window/essentials/property_selector_editor.gd").new()
+      property_editor.add_root_node(object, path)
+      add_property_editor(path, property_editor, ADD_TO_END, "Picker")
+      # TODO you should probably just use a Node. Resources are a PITA...
+      return false
+    else:
+      return false
+      
