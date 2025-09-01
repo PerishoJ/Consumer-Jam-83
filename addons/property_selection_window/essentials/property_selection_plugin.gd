@@ -4,9 +4,8 @@ extends EditorPlugin
 var plugin
 
 func _enter_tree() -> void:
-  # we'll use preload instead of classnames to avoid namespace collisions
-  #plugin = preload("res://addons/property_selection_window/essentials/editor_inspector_plugin.gd").new()
-  plugin = MyPropertySelectorPlugin.new()
+  # this is just inlined below
+  plugin = custom_property_selector_plugin.new()
   add_inspector_plugin(plugin)
   print("Adding Property Selector Plugin")
   pass
@@ -15,7 +14,8 @@ func _exit_tree() -> void:
   remove_inspector_plugin(plugin)
   pass
 
-class MyPropertySelectorPlugin extends EditorInspectorPlugin:
+## Adds the custom Editor property for new property selector class 
+class custom_property_selector_plugin extends EditorInspectorPlugin:
   const ADD_TO_END: bool = true
   func _can_handle(object):
     # Need to reference both the object containing the property(NODE)
