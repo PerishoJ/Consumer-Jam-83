@@ -18,7 +18,8 @@ func _exit_tree() -> void:
 class custom_property_selector_plugin extends EditorInspectorPlugin:
   const ADD_TO_END: bool = true
   func _can_handle(object):
-    # Need to reference both the object containing the property(NODE)
+    # Need to reference to the object containing 
+    # the property, NOT the property itself, otherwise the NodePaths don't work
     return object is Node
   
   func _parse_property(object, type, path, hint, hint_text, usage, wide):
