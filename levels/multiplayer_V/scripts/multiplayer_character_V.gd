@@ -6,6 +6,7 @@ const JUMP_VELOCITY = 4.5
 
 var target_loc = null
 
+# this belongs in Network Synchronizer
 func _process(delta):
   if not is_multiplayer_authority() and target_loc != null:
     global_position = global_position.lerp(target_loc, 4 * SPEED * delta)

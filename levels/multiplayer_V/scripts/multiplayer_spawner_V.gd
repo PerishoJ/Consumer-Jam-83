@@ -5,11 +5,12 @@ extends Node
 var _is_server = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  _parse_game_args()
+  _parse_game_args()  # Is this machine the server?
   _create_multiplayer_peer()
   _connect_callbacks()
   _debugging()
 
+### Is this the server?
 func _parse_game_args():
   var args = OS.get_cmdline_args()
   for i in range(args.size()):

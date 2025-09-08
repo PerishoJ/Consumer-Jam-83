@@ -1,11 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc64amumjnkmg"]
+[gd_scene load_steps=2 format=3 uid="uid://cy4xcx7o338yg"]
 
-[ext_resource type="Script" uid="uid://co1dyr7hhfmb8" path="res://networking_menu.gd" id="1_0iu1f"]
+[sub_resource type="GDScript" id="GDScript_d162g"]
+script/source = "extends Control
+
+@onready var menu_scene = $\".\"
+signal host
+signal join
+
+
+var level_scene = preload(\"res://levels/test_networking.tscn\")
+
+func _on_host_btn_pressed():
+  print(\"host pressed...\")
+  menu_scene.hide()
+  emit_signal(\"host\")
+
+
+func _on_join_btn_pressed():
+  menu_scene.hide()
+  emit_signal(\"join\")
+"
 
 [node name="VBoxContainer" type="VBoxContainer"]
 offset_right = 94.0
 offset_bottom = 66.0
-script = ExtResource("1_0iu1f")
+script = SubResource("GDScript_d162g")
 
 [node name="Host Btn" type="Button" parent="."]
 layout_mode = 2

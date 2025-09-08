@@ -7,7 +7,9 @@ extends Node
 ## This is a less important node, and can be synced less often.
 @export var mesh_instance: Node3D
 
-@export var attribute : NodePath
+@export var REF_test_prop : NodePath
+
+@export var test_prop : PropertySelectorNode
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

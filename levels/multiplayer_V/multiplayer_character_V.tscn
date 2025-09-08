@@ -1,10 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://j1o5cgx2asd1"]
+[gd_scene load_steps=9 format=3 uid="uid://j1o5cgx2asd1"]
 
 [ext_resource type="Script" uid="uid://eyp4y4tvjage" path="res://levels/multiplayer_V/scripts/multiplayer_character_V.gd" id="1_fk2gv"]
 [ext_resource type="Script" uid="uid://b0wkeoc07cjun" path="res://levels/multiplayer_V/scripts/player_auth_sync_V.gd" id="2_bi32m"]
-[ext_resource type="Texture2D" uid="uid://bwiyx0c3drwps" path="res://icon.png" id="3_6lmhl"]
+[ext_resource type="Script" uid="uid://dbc7b35usypyr" path="res://addons/property_selection_window/essentials/PropertySelector.gd" id="3_6lmhl"]
 [ext_resource type="Script" uid="uid://daebidd3on647" path="res://levels/multiplayer_V/scripts/some_silly_test_mesh.gd" id="3_bi32m"]
-[ext_resource type="Script" uid="uid://q7k32etaeu3o" path="res://levels/multiplayer_V/property_selection_node.gd" id="5_6f8ba"]
+[ext_resource type="Script" uid="uid://bus4ea0hquym2" path="res://levels/multiplayer_V/heap_test.gd" id="5_6f8ba"]
+
+[sub_resource type="Resource" id="Resource_6lmhl"]
+script = ExtResource("3_6lmhl")
+target_path = NodePath("")
+properties_list = Array[String]([])
+metadata/_custom_type_script = "uid://dbc7b35usypyr"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fns6b"]
 
@@ -12,16 +18,16 @@
 radial_segments = 12
 rings = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6f8ba"]
-transparency = 1
-albedo_texture = ExtResource("3_6lmhl")
-billboard_mode = 2
-
-[sub_resource type="QuadMesh" id="QuadMesh_uhk1v"]
-material = SubResource("StandardMaterial3D_6f8ba")
-
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_fk2gv")
+
+[node name="Synchronizer" type="Node" parent="." node_paths=PackedStringArray("main_node", "mesh_instance")]
+editor_description = "<Resource#-9223367802235029413>"
+script = ExtResource("2_bi32m")
+main_node = NodePath("..")
+mesh_instance = NodePath("../Mesh")
+REF_test_prop = NodePath("../Mesh")
+test_prop = SubResource("Resource_6lmhl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -31,16 +37,24 @@ shape = SubResource("CapsuleShape3D_fns6b")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_bglo7")
 
-[node name="Synchronizer" type="Node" parent="." node_paths=PackedStringArray("main_node", "mesh_instance")]
-script = ExtResource("2_bi32m")
-main_node = NodePath("..")
-mesh_instance = NodePath("../Mesh")
-attribute = NodePath("../someSillyTestMesh")
-
 [node name="someSillyTestMesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("QuadMesh_uhk1v")
+editor_description = "<Resource#-9223367827870627403>"
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+rotation_order = 0
+top_level = true
+layers = 0
+cast_shadow = 0
+lod_bias = 0.0
+ignore_occlusion_culling = true
+gi_mode = 0
+gi_lightmap_texel_scale = 0.0
+skeleton = NodePath("")
 script = ExtResource("3_bi32m")
 
-[node name="PropertySelectionNode" type="Node" parent="."]
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "TEST THIS OUT"
+
+[node name="Node" type="Node" parent="."]
 script = ExtResource("5_6f8ba")
-node_path = NodePath("..")
