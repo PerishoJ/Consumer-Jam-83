@@ -1,5 +1,7 @@
 extends Object
 class_name MinHeap
+## For heap to work, the stored objects must 
+## have the function get_score()
 
 var heap : Array
 

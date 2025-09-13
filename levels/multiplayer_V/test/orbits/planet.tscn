@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxjcakvgu28s1"]
+
+[ext_resource type="Script" uid="uid://dg4ktonh7aq1m" path="res://levels/multiplayer_V/test/orbits/orbit.gd" id="1_yqloh"]
+[ext_resource type="Script" uid="uid://cbpdp68qyx8s7" path="res://levels/multiplayer_V/test/orbits/sync_node.gd" id="2_h583h"]
+[ext_resource type="Script" uid="uid://dbc7b35usypyr" path="res://addons/property_selection_window/essentials/PropertySelector.gd" id="3_h583h"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ejukk"]
+
+[sub_resource type="Resource" id="Resource_w4s4d"]
+script = ExtResource("3_h583h")
+target_path = NodePath("../..")
+properties_list = Array[String](["rotation_speed"])
+metadata/_custom_type_script = "uid://dbc7b35usypyr"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ejukk"]
+
+[node name="Planet" type="Node3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+script = ExtResource("1_yqloh")
+rotation_speed = 2.0
+
+[node name="PlanetMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = SubResource("SphereMesh_ejukk")
+
+[node name="PlanetSync" type="Area3D" parent="PlanetMesh"]
+script = ExtResource("2_h583h")
+properties = SubResource("Resource_w4s4d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlanetMesh/PlanetSync"]
+shape = SubResource("SphereShape3D_ejukk")

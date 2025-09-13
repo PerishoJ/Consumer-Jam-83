@@ -1,0 +1,32 @@
+[gd_scene load_steps=11 format=3 uid="uid://baj8caxlbstqp"]
+
+[ext_resource type="Script" uid="uid://bx1uqadc7ny3t" path="res://levels/multiplayer_V/test/orbits/flying_cube.gd" id="1_a5uxe"]
+[ext_resource type="Material" uid="uid://fldwa4fg3txd" path="res://levels/multiplayer_V/test/orbits/black_material.tres" id="2_hd344"]
+[ext_resource type="Material" uid="uid://ckf2saqfoi3vc" path="res://levels/multiplayer_V/test/orbits/blue_material.tres" id="3_05sxm"]
+[ext_resource type="Material" uid="uid://d3phgap14cmop" path="res://levels/multiplayer_V/test/orbits/green_material.tres" id="4_n1ib8"]
+[ext_resource type="Material" uid="uid://t2qcks1tki47" path="res://levels/multiplayer_V/test/orbits/red_material.tres" id="5_eqw56"]
+[ext_resource type="Material" uid="uid://dyrlynk0stc6r" path="res://levels/multiplayer_V/test/orbits/white_material.tres" id="6_55nbp"]
+[ext_resource type="Script" uid="uid://vrc83ojrxhrm" path="res://levels/multiplayer_V/test/orbits/network_sync.gd" id="7_n1ib8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a5uxe"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3acqu"]
+material = ExtResource("2_hd344")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eqw56"]
+
+[node name="FlyingCube" type="RigidBody3D"]
+script = ExtResource("1_a5uxe")
+cube_materials = Array[Material]([ExtResource("2_hd344"), ExtResource("3_05sxm"), ExtResource("4_n1ib8"), ExtResource("5_eqw56"), ExtResource("6_55nbp")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_a5uxe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_3acqu")
+
+[node name="NetworkSyncField" type="Area3D" parent="."]
+script = ExtResource("7_n1ib8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NetworkSyncField"]
+shape = SubResource("BoxShape3D_eqw56")

@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameGlobals="*res://levels/multiplayer_III/game_globals.gd"
+Networking="*res://levels/multiplayer_V/networking.gd"
 
 [debug]
 

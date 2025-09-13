@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhdmwih03jcny"]
+
+[ext_resource type="Script" uid="uid://d1et24bvshacl" path="res://levels/multiplayer_V/test/orbits/client_sync.gd" id="1_q34u4"]
+[ext_resource type="Script" uid="uid://ccyg67ukgq5ct" path="res://levels/multiplayer_V/test/orbits/object_spawner.gd" id="2_odxba"]
+[ext_resource type="PackedScene" uid="uid://bxjcakvgu28s1" path="res://levels/multiplayer_V/test/orbits/planet.tscn" id="3_vx1l0"]
+[ext_resource type="Script" uid="uid://deb3ahbvj27dt" path="res://levels/multiplayer_V/test/orbits/game_controller.gd" id="4_s5qch"]
+[ext_resource type="PackedScene" uid="uid://baj8caxlbstqp" path="res://levels/multiplayer_V/test/orbits/FlyingCube.tscn" id="5_3n5dq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0c3ld"]
+
+[sub_resource type="Sky" id="Sky_fhuta"]
+sky_material = SubResource("ProceduralSkyMaterial_0c3ld")
+
+[sub_resource type="Environment" id="Environment_ejukk"]
+background_mode = 2
+sky = SubResource("Sky_fhuta")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_q34u4"]
+height = 100.0
+radius = 20.0
+
+[node name="StressTest" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.0592912, 0.0013455, -0.99824, 0.0226873, 0.999743, -6.93889e-18, 0.997983, -0.0226474, -0.0593064, -62.5224, 0.0596161, -45.642)
+environment = SubResource("Environment_ejukk")
+script = ExtResource("1_q34u4")
+
+[node name="Area3D" type="Area3D" parent="Camera3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Area3D"]
+shape = SubResource("CylinderShape3D_q34u4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.666532, 0.745476, 0, -0.745476, 0.666532, 0, 3.38036, 0)
+
+[node name="ObjectSpawner" type="Node" parent="." node_paths=PackedStringArray("base_container")]
+script = ExtResource("2_odxba")
+object_repo = Dictionary[String, PackedScene]({
+"planet": ExtResource("3_vx1l0")
+})
+base_container = NodePath("..")
+scene = ExtResource("3_vx1l0")
+
+[node name="GameController" type="Node" parent="."]
+script = ExtResource("4_s5qch")
+boxScene = ExtResource("5_3n5dq")
+
+[node name="SpawnLocation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.9465, 0, 0)
+
+[connection signal="area_entered" from="Camera3D/Area3D" to="Camera3D" method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Camera3D/Area3D" to="Camera3D" method="_on_area_3d_area_exited"]
