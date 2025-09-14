@@ -28,9 +28,7 @@ class custom_property_selector_plugin extends EditorInspectorPlugin:
     # print ("Parsing " + path + " of object " + str(object))
     if object is Node and path != null and ( hint_text == "PropertySelectorNode" || hint_text.contains("PropertySelectorNode")):
       property_editor_path = path
-      print (" Setting path to " + str(path))
     if path == "properties_list" and object is PropertySelectorNode:
-      print ("Adding button to " + str(object) + " of path " + str(path))
       var property_editor = preload("res://addons/property_selection_window/essentials/property_selector_editor.gd").new()
       # The target object is not the PropertySelectorNode, that's just a property
       # The target object is the Node that contains the PropertySelectorNode property
@@ -56,9 +54,7 @@ class custom_property_selector_plugin extends EditorInspectorPlugin:
         # Debug all props if you want
         # print("Property: %s, Type: %d, Hint: %d, HintString: %s" % [name, type, hint, hint_string])
         if hint_string.find("PropertySelectorNode") != -1:
-          print("Found PropertySelectorNode property:", name, " (hint:", hint_string, ")")
           property_editor_root = object
   
   func _parse_end(object):
-    print(str(object) + " end ")
     pass

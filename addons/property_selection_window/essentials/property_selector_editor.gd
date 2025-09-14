@@ -29,11 +29,8 @@ func set_selector_property( selector : PropertySelectorNode):
   selector_property = selector
 
 func _open_prop_select_window():
-  print ("opening prop win")
   # we should be currently editing the PropertyPath object, whose list SHOULD contain all the properties we just selected
   if(get_edited_object() != null):
-    print("getting property " + str(prop_name) + " from object " + str(root))
-
     var current_prop_list = selector_property.properties_list
     if(current_prop_list == null):
       current_prop_list = []
