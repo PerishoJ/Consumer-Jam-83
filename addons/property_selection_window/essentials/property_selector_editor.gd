@@ -6,6 +6,9 @@ var select_button: Button
 var root : Node
 # The name of the property in the root object that IS a property selector object
 var prop_name : String
+
+var selector_property : PropertySelectorNode
+
 func _init():
   select_button = Button.new();
   select_button.text = "Property Menu"
@@ -20,18 +23,22 @@ func add_root_node( root , prop_name):
   print("Setting root to " + str(root))
   self.prop_name = prop_name
 
+## This is the property list held by the PropertySelectorNode.
+## This is the datastructure that the menu will put it's values into.
+func set_selector_property( selector : PropertySelectorNode):
+  selector_property = selector
+
 func _open_prop_select_window():
+  print ("opening prop win")
   # we should be currently editing the PropertyPath object, whose list SHOULD contain all the properties we just selected
   if(get_edited_object() != null):
-    var selector_node :PropertySelectorNode = root.get(prop_name) 
-    if not selector_node:
-      root.set(prop_name, PropertySelectorNode.new())
-      return
-    var current_prop_list = selector_node.properties_list
+    print("getting property " + str(prop_name) + " from object " + str(root))
+
+    var current_prop_list = selector_property.properties_list
     if(current_prop_list == null):
       current_prop_list = []
     var property_selector = PropertySelectionWindow.new()
-    property_selector.create_window(root.get_node_or_null(selector_node.target_path), # Target node
+    property_selector.create_window(root, # Target node
     current_prop_list, # initially selected properties
     false, # show hidden properties
     -1, # filter type
@@ -40,9 +47,8 @@ func _open_prop_select_window():
     push_error("Could not find Property Selector Object being edited")
     
 func propertry_selection_callback(selected_properties : Array[String]):
-  var selector = ( root.get(prop_name)  as PropertySelectorNode)
-  selector.properties_list = selected_properties
-  emit_changed(get_edited_property(), selector)
+  selector_property.properties_list = selected_properties
+  emit_changed(get_edited_property(), selector_property)
   pass
   
 func _update_property():
