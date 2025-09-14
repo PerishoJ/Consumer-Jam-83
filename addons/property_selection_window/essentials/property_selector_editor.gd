@@ -7,7 +7,7 @@ var root : Node
 # The name of the property in the root object that IS a property selector object
 var prop_name : String
 
-var selector_property : PropertySelectorNode
+var selector_property : PropertySelection
 
 func _init():
   select_button = Button.new();
@@ -23,9 +23,9 @@ func add_root_node( root , prop_name):
   print("Setting root to " + str(root))
   self.prop_name = prop_name
 
-## This is the property list held by the PropertySelectorNode.
+## This is the property list held by the PropertySelection.
 ## This is the datastructure that the menu will put it's values into.
-func set_selector_property( selector : PropertySelectorNode):
+func set_selector_property( selector : PropertySelection):
   selector_property = selector
 
 func _open_prop_select_window():
@@ -47,6 +47,3 @@ func propertry_selection_callback(selected_properties : Array[String]):
   selector_property.properties_list = selected_properties
   emit_changed(get_edited_property(), selector_property)
   pass
-  
-func _update_property():
-  print("Property Change Detected")
