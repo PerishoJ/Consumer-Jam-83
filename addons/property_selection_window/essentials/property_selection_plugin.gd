@@ -20,14 +20,12 @@ class custom_property_selector_plugin extends EditorInspectorPlugin:
   var property_editor_root
   
   func _can_handle(object):
-    return  object is PropertySelection
+    return  object is PropertySelection || object is Node
     
   func _parse_property(object, type, path, hint, hint_text, usage, wide):
     if  object is PropertySelection and path == "props":
       _add_PropertySelection_property_editor(object,path)
-      return false
-    else:
-      return false
+    return false
       
   func _add_PropertySelection_property_editor(object,path):
     var property_editor = preload("res://addons/property_selection_window/essentials/property_selector_editor.gd").new()
@@ -40,10 +38,10 @@ class custom_property_selector_plugin extends EditorInspectorPlugin:
   
 
   func _parse_begin(object: Object) -> void:
-    if _is_property_a_PropertySelection(object):
+    if _does_object_have_a_PropertySelection_property(object):
       property_editor_root = object
 
-  func _is_property_a_PropertySelection(object : Object):
+  func _does_object_have_a_PropertySelection_property(object : Object):
     # Get the list of all properties for this object
     var property_list := object.get_property_list()
     for prop in property_list:
@@ -56,7 +54,5 @@ class custom_property_selector_plugin extends EditorInspectorPlugin:
       if hint_string.find("PropertySelection") != -1:
         return true
     return false
-  
-  func _parse_end(object):
-    pass
+
     
