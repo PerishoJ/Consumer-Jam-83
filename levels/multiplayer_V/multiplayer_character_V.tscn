@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://eyp4y4tvjage" path="res://levels/multiplayer_V/scripts/multiplayer_character_V.gd" id="1_fk2gv"]
 [ext_resource type="Script" uid="uid://b0wkeoc07cjun" path="res://levels/multiplayer_V/scripts/player_auth_sync_V.gd" id="2_bi32m"]
-[ext_resource type="Script" uid="uid://dbc7b35usypyr" path="res://addons/property_selection_window/essentials/PropertySelector.gd" id="3_6lmhl"]
+[ext_resource type="Script" uid="uid://bs4mrdpqy64p1" path="res://addons/property_selection_window/essentials/property_selection.gd" id="3_6lmhl"]
 [ext_resource type="Script" uid="uid://daebidd3on647" path="res://levels/multiplayer_V/scripts/some_silly_test_mesh.gd" id="3_bi32m"]
 
-[sub_resource type="Resource" id="Resource_6lmhl"]
+[sub_resource type="Resource" id="Resource_6f8ba"]
 script = ExtResource("3_6lmhl")
-target_path = NodePath("")
-properties_list = Array[String]([])
-metadata/_custom_type_script = "uid://dbc7b35usypyr"
+node = NodePath("")
+props = Array[String]([])
+metadata/_custom_type_script = "uid://bs4mrdpqy64p1"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fns6b"]
 
@@ -82,7 +82,7 @@ script = ExtResource("2_bi32m")
 main_node = NodePath("..")
 mesh_instance = NodePath("../Mesh")
 REF_test_prop = NodePath("../Mesh")
-test_prop = SubResource("Resource_6lmhl")
+test_prop = SubResource("Resource_6f8ba")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

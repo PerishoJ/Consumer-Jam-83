@@ -1,0 +1,40 @@
+[gd_scene load_steps=13 format=3 uid="uid://whway1bte3ld"]
+
+[ext_resource type="Script" uid="uid://bx1uqadc7ny3t" path="res://levels/multiplayer_V/test/orbits/flying_cube.gd" id="1_ynbw1"]
+[ext_resource type="Material" uid="uid://fldwa4fg3txd" path="res://levels/multiplayer_V/test/orbits/black_material.tres" id="2_8qtyj"]
+[ext_resource type="Material" uid="uid://ckf2saqfoi3vc" path="res://levels/multiplayer_V/test/orbits/blue_material.tres" id="3_r0ne8"]
+[ext_resource type="Material" uid="uid://d3phgap14cmop" path="res://levels/multiplayer_V/test/orbits/green_material.tres" id="4_sbvkt"]
+[ext_resource type="Material" uid="uid://t2qcks1tki47" path="res://levels/multiplayer_V/test/orbits/red_material.tres" id="5_6jqrc"]
+[ext_resource type="Material" uid="uid://dyrlynk0stc6r" path="res://levels/multiplayer_V/test/orbits/white_material.tres" id="6_nqo1u"]
+[ext_resource type="Script" uid="uid://vrc83ojrxhrm" path="res://levels/multiplayer_V/test/orbits/network_sync.gd" id="7_27bfs"]
+[ext_resource type="Script" uid="uid://bs4mrdpqy64p1" path="res://addons/property_selection_window/essentials/property_selection.gd" id="8_4cwg7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a5uxe"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3acqu"]
+material = ExtResource("5_6jqrc")
+
+[sub_resource type="Resource" id="Resource_eqw56"]
+script = ExtResource("8_4cwg7")
+node = NodePath("..")
+props = Array[String](["basis", "position"])
+metadata/_custom_type_script = "uid://bs4mrdpqy64p1"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eqw56"]
+
+[node name="FlyingCube" type="RigidBody3D"]
+script = ExtResource("1_ynbw1")
+cube_materials = Array[Material]([ExtResource("2_8qtyj"), ExtResource("3_r0ne8"), ExtResource("4_sbvkt"), ExtResource("5_6jqrc"), ExtResource("6_nqo1u")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_a5uxe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_3acqu")
+
+[node name="NetworkSyncField" type="Area3D" parent="."]
+script = ExtResource("7_27bfs")
+synced_vars = SubResource("Resource_eqw56")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NetworkSyncField"]
+shape = SubResource("BoxShape3D_eqw56")

@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var properties : PropertySelectorNode
+@export var properties : PropertySelection
 @export var network_id : int
 
 func _ready():

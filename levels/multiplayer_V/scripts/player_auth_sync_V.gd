@@ -9,7 +9,7 @@ extends Node
 
 @export var REF_test_prop : NodePath
 
-@export var test_prop : PropertySelectorNode
+@export var test_prop : PropertySelection
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

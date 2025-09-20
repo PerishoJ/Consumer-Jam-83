@@ -1,6 +1,8 @@
 extends Node
 
 @export var player_id : int
+# this could be generic...maybe later
+@export var serializer : RegistrySerializer
 
 ## Keeps track of all the properties to send down the line,
 ## in order of priority, so that clients get what they are 
@@ -19,15 +21,22 @@ func send_updates(properties : Array):
   pass
   
 
-func _pass_to_network_update_queue(networkUpdateData, origin_object):
+func _pass_to_network_update_queue(origin_obj_network_id, networkUpdateData):
   # TODO make sure this object has a wrapper with priority
   # TODO calculate priority and assign it based on which object is sending it, etc
+  # TODO make sure origin object is indexed
   network_heap.insert(networkUpdateData)
   pass
 
 @rpc("call_remote")
-func spawn():
-  # Make sure we have enough metadata to at least spawn one thing
+func spawn(serialized_scene_id : int, location : Vector3):
+  # we can reuse the metadata grabber to get/assign metadata
+  # we need a registry for objects that can be spawned in...
+  # ...do 
+  var scene = serializer.deserialize(serialized_scene_id)
+  var new_object = scene.instantiate()
+  (new_object as Node3D).position = location
+  get_tree().root.add_child(new_object)
   pass
   
   
@@ -37,14 +46,23 @@ func despawn():
   pass
 
 func _on_area_3d_area_entered(area):
+  print("area enter")
   if multiplayer.is_server():
+    print("object inbound")
     if area is NetworkSync:
       # Subscribe to property updates when entering area
-      (area as NetworkSync).network_update_coarse.connect(_pass_to_network_update_queue)
+      # TODO add the NetworkSync to a heap of objects to update
+      # Get what type of object this is, and spawn it on the client
+      var obj = area.get_parent_node_3d()
+      var ser_id = serializer.serialize(obj)
+      print('sending sync command')
+      spawn.rpc_id(player_id , ser_id, obj.position)
+      pass   
     pass
   pass # Replace with function body.
 #
 func _on_area_3d_area_exited(area):
+  print("area exit")
   if multiplayer.is_server():
     if area is NetworkSync:
       # Stop listening to updates from objects that leave this area
