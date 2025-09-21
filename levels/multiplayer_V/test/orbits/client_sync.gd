@@ -64,6 +64,6 @@ func _on_area_3d_area_exited(area):
   print("area exit")
   if multiplayer.is_server():
     if area is NetworkSync:
-      # Stop listening to updates from objects that leave this area
-      (area as NetworkSync).network_update_coarse.disconnect(_pass_to_network_update_queue)
+      ## TODO remove this from the network update heap
+      pass
   pass # Replace with function body.

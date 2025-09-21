@@ -33,7 +33,6 @@ metadata/__load_path__ = "res://levels/multiplayer_V/test/orbits/planet.tscn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.5224, 0.0596161, -45.642)
 
 [node name="Player" type="Camera3D" parent="Area3D" node_paths=PackedStringArray("serializer")]
-transform = Transform3D(-4.28408e-08, 1, 0, -1, -4.28408e-08, 0, 0, 0, 1, 0, 0, 0)
 environment = SubResource("Environment_ejukk")
 script = ExtResource("1_q34u4")
 player_id = 100
