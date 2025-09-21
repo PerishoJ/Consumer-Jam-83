@@ -1,9 +1,8 @@
 extends Node
 
 @export var player_id : int
-# this could be generic...maybe later
+# How...do we get this?
 @export var serializer : RegistrySerializer
-
 ## Keeps track of all the properties to send down the line,
 ## in order of priority, so that clients get what they are 
 ## most interested in...mostly

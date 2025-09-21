@@ -22,7 +22,7 @@ func _process(delta):
 func _spawn_periodically( ):
   if(Time.get_ticks_msec() > delay): # probably could use one shot timer...alwell
     _reset_delay()
-    var new_box : RigidBody3D = boxScene.instantiate()
+    var new_box = boxScene.instantiate()
     if spawn_location:
       new_box.position = spawn_location.position
     else:

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d1et24bvshacl" path="res://levels/multiplayer_V/test/orbits/client_sync.gd" id="1_q34u4"]
 [ext_resource type="Script" uid="uid://ccyg67ukgq5ct" path="res://levels/multiplayer_V/test/orbits/object_spawner.gd" id="2_odxba"]
+[ext_resource type="PackedScene" uid="uid://bj7phladpl68l" path="res://levels/multiplayer_V/test/orbits/simple_moving_cube.tscn" id="4_1nkpm"]
 [ext_resource type="Script" uid="uid://deb3ahbvj27dt" path="res://levels/multiplayer_V/test/orbits/game_controller.gd" id="4_s5qch"]
-[ext_resource type="PackedScene" uid="uid://baj8caxlbstqp" path="res://levels/multiplayer_V/test/orbits/FlyingCube.tscn" id="5_3n5dq"]
 [ext_resource type="Script" uid="uid://ckvmne13kvvg7" path="res://levels/multiplayer_V/test/orbits/scene_serializer.gd" id="5_q34u4"]
 [ext_resource type="PackedScene" uid="uid://cmyb3yl53k0jm" path="res://levels/multiplayer_V/test/orbits/FlyingCube_black.tscn" id="6_1nkpm"]
 [ext_resource type="PackedScene" uid="uid://di46xc1phtthx" path="res://levels/multiplayer_V/test/orbits/FlyingCube_blue.tscn" id="7_t4wyo"]
@@ -21,31 +21,31 @@ background_mode = 2
 sky = SubResource("Sky_fhuta")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_q34u4"]
-height = 400.0
-radius = 20.0
+height = 100.0
+radius = 100.0
 
 [sub_resource type="Resource" id="Resource_jj11s"]
 metadata/__load_path__ = "res://levels/multiplayer_V/test/orbits/planet.tscn"
 
 [node name="StressTest" type="Node3D"]
 
-[node name="Player" type="Camera3D" parent="."]
-transform = Transform3D(-0.0592912, 0.0013455, -0.99824, 0.0226873, 0.999743, -6.93889e-18, 0.997983, -0.0226474, -0.0593064, -62.5224, 0.0596161, -45.642)
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.5224, 0.0596161, -45.642)
+
+[node name="Player" type="Camera3D" parent="Area3D" node_paths=PackedStringArray("serializer")]
+transform = Transform3D(-4.28408e-08, 1, 0, -1, -4.28408e-08, 0, 0, 0, 1, 0, 0, 0)
 environment = SubResource("Environment_ejukk")
 script = ExtResource("1_q34u4")
+player_id = 100
+serializer = NodePath("../../SceneSerializer")
 
-[node name="Area3D" type="Area3D" parent="Player"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CylinderShape3D_q34u4")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.666532, 0.745476, 0, -0.745476, 0.666532, 0, 3.38036, 0)
 
-[node name="ObjectSpawner" type="Node" parent="." node_paths=PackedStringArray("base_container")]
+[node name="NetworkSpawner" type="Node" parent="." node_paths=PackedStringArray("base_container")]
 script = ExtResource("2_odxba")
 base_container = NodePath("..")
 scene = SubResource("Resource_jj11s")
@@ -53,7 +53,7 @@ scene = SubResource("Resource_jj11s")
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("4_s5qch")
 MAX_DELAY_IN_SEC = 2000.0
-boxScene = ExtResource("5_3n5dq")
+boxScene = ExtResource("4_1nkpm")
 
 [node name="SpawnLocation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.9465, 0, 0)
@@ -62,5 +62,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.9465, 0, 0)
 script = ExtResource("5_q34u4")
 registry = Array[PackedScene]([ExtResource("6_1nkpm"), ExtResource("7_t4wyo"), ExtResource("8_xusw1"), ExtResource("9_glxky"), ExtResource("10_xrmjr")])
 
-[connection signal="area_entered" from="Player/Area3D" to="Player" method="_on_area_3d_area_entered"]
-[connection signal="area_exited" from="Player/Area3D" to="Player" method="_on_area_3d_area_exited"]
+[connection signal="area_entered" from="Area3D" to="Area3D/Player" method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="Area3D/Player" method="_on_area_3d_area_exited"]
