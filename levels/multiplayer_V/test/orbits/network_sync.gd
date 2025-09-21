@@ -1,51 +1,35 @@
 extends Area3D
 class_name NetworkSync
 
-# TODO need a network ID so that we have a place to send these variables back to
-# once we've sent them across from server to the client.
+## handles network id of scene, listing properties persisted over the network
+## and serializing, deserializing them
 
-## ID of object. Is Persistant across the network
+## Network ID Scene. Persistant across the network
 var network_id : int
 
-signal network_update_coarse
-signal network_update_fine
-
-@export var synced_vars : PropertySelection
-# TODO make FINE and COARSE synced variables lists separately.
-
-@export var course_period_millis : int = 700
-var course_update_time : int = 0
-@export var fine_period_millis : int = 100
-var fine_update_time : int = 0
-
-
-func _process(delta):
-  
-  if Time.get_ticks_msec() > course_update_time:
-    _course_update()
-    course_update_time = Time.get_ticks_msec() + course_period_millis
-    
-  if Time.get_ticks_msec() > fine_update_time:
-    fine_update_time = Time.get_ticks_msec() + fine_period_millis
-    _fine_update()
-  
-  pass
+@export var synced_vars : Array[PropertySelection]
   
   
-func _fine_update():
-  var prop_updates = {}
-  # Each PropertiesSelection object just represents the properties for a single
-  # object...so synced_vars needs to be a list of PropertySelection objects.
+func get_update():
+  var scene_updates = {}
+  # go through each tracked node
+  for selection in synced_vars:
+    # Get the properties and values for each node
+    var prop_updates = {}
+    for prop in selection.props:
+      var val = get_node(selection.node).get(prop)
+      prop_updates[prop]= val
+    scene_updates[selection.node] = prop_updates
+  return scene_updates
   
-  #TODO make synced_vars a list. Iterate over that list. Have the 'node' as the key, and dict of props as value. 
-  #populate the dict w/ props from a single child node 
-  for prop in synced_vars.props:
-    var val = get_node(synced_vars.node).get(prop)
-    prop_updates[prop]= val
-  
-  # broadcast a dict of props and net_id so listeners know which object it came from.  
-  network_update_fine.emit(network_id , prop_updates)
-  
-
-func _course_update():
-  pass
+# TODO test this...maybe make a mirror scene. One object is controlled, the other just mirrors
+func apply_update(scene_updates : Dictionary):
+  for update_node_path in scene_updates.keys():
+    # Get the properties that belong to this node
+    var update_properties = scene_updates[update_node_path] as Dictionary
+    # Get the actual node from the node path
+    var update_node = get_node(update_node_path)
+    # Update each property with it's value
+    for prop_name in update_properties.keys():
+      var prop_value = update_properties[prop_name]
+      update_node[prop_name] = prop_value
