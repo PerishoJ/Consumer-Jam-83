@@ -29,39 +29,38 @@ func _pass_to_network_update_queue(origin_obj_network_id, networkUpdateData):
 
 @rpc("call_remote")
 func spawn(serialized_scene_id : int, location : Vector3):
-  # we can reuse the metadata grabber to get/assign metadata
-  # we need a registry for objects that can be spawned in...
-  # ...do 
+  print("Spawning node")
   var scene = serializer.deserialize(serialized_scene_id)
   var new_object = scene.instantiate()
   (new_object as Node3D).position = location
-  get_tree().root.add_child(new_object)
+  _get_scene_root().add_child(new_object)
   pass
   
+## Need a more reliable way to get the place to add scenes into
+func _get_scene_root()->Node:
+  return get_parent()
   
 @rpc("call_remote")
 func despawn():
   # I don't know if we need this, or if the client can handle garbage collection themselves?
   pass
 
-func _on_area_3d_area_entered(area):
-  print("area enter")
+func _on_area_entered(area):
+  print("area entered")
   if multiplayer.is_server():
-    print("object inbound")
     if area is NetworkSync:
       # Subscribe to property updates when entering area
       # TODO add the NetworkSync to a heap of objects to update
       # Get what type of object this is, and spawn it on the client
       var obj = area.get_parent_node_3d()
       var ser_id = serializer.serialize(obj)
-      print('sending sync command')
+      print('sending sync command to client ')
       spawn.rpc_id(player_id , ser_id, obj.position)
       pass   
     pass
   pass # Replace with function body.
-#
-func _on_area_3d_area_exited(area):
-  print("area exit")
+
+func _on_area_exited(area: Area3D) -> void:
   if multiplayer.is_server():
     if area is NetworkSync:
       ## TODO remove this from the network update heap

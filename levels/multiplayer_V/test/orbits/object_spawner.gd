@@ -6,6 +6,14 @@ extends Node
 func _ready():
   if not base_container:
     base_container =  $".."
+  if multiplayer.is_server():
+    multiplayer.peer_connected.connect(spawn_player)
+  else:
+    pass
+
+func spawn_player(id):
+  $"../Player".player_id = id
+  pass
 
 @rpc("call_local","any_peer","reliable")
 func spawn( obj_name:String, props: Dictionary):

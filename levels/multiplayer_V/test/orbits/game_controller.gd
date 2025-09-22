@@ -27,11 +27,9 @@ func _spawn_periodically( ):
       new_box.position = spawn_location.position
     else:
       new_box.position = Vector3.ZERO
-    
     new_box.position.y = new_box.position.y + randi_range(-4,4)
     $"..".add_child(new_box)
-    
-    
-    
+
+
 func _reset_delay():
   delay = Networking.rng.randf()*MAX_DELAY_IN_SEC + Time.get_ticks_msec()
