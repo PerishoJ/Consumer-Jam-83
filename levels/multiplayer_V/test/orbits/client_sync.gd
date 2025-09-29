@@ -29,7 +29,7 @@ func _pass_to_network_update_queue(origin_obj_network_id, networkUpdateData):
 
 @rpc("call_remote")
 func spawn(serialized_scene_id : int, location : Vector3):
-  print("Spawning node")
+  # print("Spawning node")
   var scene = serializer.deserialize(serialized_scene_id)
   var new_object = scene.instantiate()
   (new_object as Node3D).position = location
@@ -46,7 +46,7 @@ func despawn():
   pass
 
 func _on_area_entered(area):
-  print("area entered")
+  # print("area entered")
   if multiplayer.is_server():
     if area is NetworkSync:
       # Subscribe to property updates when entering area
@@ -54,7 +54,7 @@ func _on_area_entered(area):
       # Get what type of object this is, and spawn it on the client
       var obj = area.get_parent_node_3d()
       var ser_id = serializer.serialize(obj)
-      print('sending sync command to client ')
+      # print('sending sync command to client ')
       spawn.rpc_id(player_id , ser_id, obj.position)
       pass   
     pass

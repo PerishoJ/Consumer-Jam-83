@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj7phladpl68l"]
+[gd_scene load_steps=8 format=3 uid="uid://bj7phladpl68l"]
 
 [ext_resource type="Script" uid="uid://0vwwp4h7550v" path="res://simple_box_move.gd" id="1_dfa55"]
 [ext_resource type="Script" uid="uid://vrc83ojrxhrm" path="res://levels/multiplayer_V/test/orbits/network_sync.gd" id="2_5wj74"]
@@ -14,7 +14,9 @@ metadata/_custom_type_script = "uid://bs4mrdpqy64p1"
 
 [sub_resource type="BoxMesh" id="BoxMesh_7pt0g"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_dfa55"]
+
+[node name="Node3D" type="CharacterBody3D"]
 script = ExtResource("1_dfa55")
 
 [node name="NetworkSyncField" type="Area3D" parent="."]
@@ -26,3 +28,6 @@ shape = SubResource("BoxShape3D_xdxls")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_7pt0g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_dfa55")

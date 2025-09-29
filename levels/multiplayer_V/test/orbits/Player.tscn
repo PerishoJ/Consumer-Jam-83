@@ -19,7 +19,7 @@ radius = 100.0
 script = ExtResource("1_5npe3")
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(0.837757, -0.155843, 0.523332, -7.56418e-09, 0.958407, 0.285404, -0.546044, -0.239099, 0.802912, 3.17551, 2.98853, 7.96625)
+transform = Transform3D(0.396298, -0.262036, 0.879935, -8.67826e-09, 0.958407, 0.285404, -0.918122, -0.113105, 0.379815, 5.5301, 2.98853, 7.96625)
 environment = SubResource("Environment_ejukk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

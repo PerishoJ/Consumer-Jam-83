@@ -19,7 +19,7 @@ func spawn_player(id):
 func spawn( obj_name:String, props: Dictionary):
   var scene = object_repo.get(obj_name)
   if scene:
-    print("found scene. Adding")
+    # print("found scene. Adding")
     var new_obj = scene.instantiate()
     base_container.add_child.call_deferred(new_obj)
     for key in props.keys():
