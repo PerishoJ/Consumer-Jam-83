@@ -12,7 +12,7 @@ func _ready():
   var rnd_scale = Networking.rng.randf_range(MIN_SIZE,MAX_SIZE)
   set_overall_scale (rnd_scale)
   
-func _process(delta):
+func _process(_delta):
   if position.length() > 500:
     queue_free()
 
@@ -31,7 +31,7 @@ func set_cube_material(mat):
     $MeshInstance3D.mesh.material = new_mat
   elif mat is String :
     var new_mat = load(mat).duplicate()
-    $MeshInstance3D.mesh.material_override = mat
+    $MeshInstance3D.mesh.material_override = new_mat
 
 
 func set_overall_scale (scl):

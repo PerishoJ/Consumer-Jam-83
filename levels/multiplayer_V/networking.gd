@@ -22,6 +22,13 @@ func _ready():
   multiplayer.multiplayer_peer = peer
 
 func get_network_id():
+  # TODO mutex
+  # TODO could use series numbers to avoid collision
   return rng.randi();
   
+func is_host() -> bool:
+  return is_server
+
+func is_client() -> bool:
+  return not is_host()
   

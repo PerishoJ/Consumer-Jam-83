@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhdmwih03jcny"]
+[gd_scene load_steps=11 format=3 uid="uid://bhdmwih03jcny"]
 
 [ext_resource type="PackedScene" uid="uid://crprymwmj5go8" path="res://levels/multiplayer_V/test/orbits/Player.tscn" id="1_1nkpm"]
 [ext_resource type="Script" uid="uid://ccyg67ukgq5ct" path="res://levels/multiplayer_V/test/orbits/object_spawner.gd" id="2_odxba"]
@@ -11,12 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://whway1bte3ld" path="res://levels/multiplayer_V/test/orbits/FlyingCube_red.tscn" id="9_glxky"]
 [ext_resource type="PackedScene" uid="uid://dn5qy6e8a7hgb" path="res://levels/multiplayer_V/test/orbits/FlyingCube_white.tscn" id="10_xrmjr"]
 
-[sub_resource type="Resource" id="Resource_jj11s"]
-metadata/__load_path__ = "res://levels/multiplayer_V/test/orbits/planet.tscn"
-
 [node name="StressTest" type="Node3D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("serializer") instance=ExtResource("1_1nkpm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.847771)
 serializer = NodePath("../SceneSerializer")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -25,12 +23,12 @@ transform = Transform3D(1, 0, 0, 0, 0.666532, 0.745476, 0, -0.745476, 0.666532, 
 [node name="NetworkSpawner" type="Node" parent="." node_paths=PackedStringArray("base_container")]
 script = ExtResource("2_odxba")
 base_container = NodePath("..")
-scene = SubResource("Resource_jj11s")
 
-[node name="GameController" type="Node" parent="."]
+[node name="GameController" type="Node" parent="." node_paths=PackedStringArray("spawn_location")]
 script = ExtResource("4_s5qch")
 MAX_DELAY_IN_SEC = 2000.0
 boxScene = ExtResource("4_1nkpm")
+spawn_location = NodePath("../SpawnLocation")
 
 [node name="SpawnLocation" type="Node3D" parent="."]
 transform = Transform3D(0.99242, 0.0726775, 0.0990978, -0.0662323, 0.995562, -0.0668499, -0.103517, 0.0597796, 0.99283, 0, 0, 0)

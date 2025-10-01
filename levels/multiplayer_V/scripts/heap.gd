@@ -51,7 +51,7 @@ func _has_parent(i : int):
   
   
 func _parent(i : int):
-  return floor( i / 2)
+  return floor( float(i) / 2.0)
 
 
 func _min ( orig: int , other: int ):

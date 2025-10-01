@@ -2,11 +2,10 @@ extends Node
 
 @export var object_repo : Dictionary [String, PackedScene] = {}
 @export var base_container : Node
-@export var scene : PackedScene
 func _ready():
   if not base_container:
     base_container =  $".."
-  if multiplayer.is_server():
+  if Networking.is_host():
     multiplayer.peer_connected.connect(spawn_player)
   else:
     pass
@@ -22,6 +21,7 @@ func spawn( obj_name:String, props: Dictionary):
     # print("found scene. Adding")
     var new_obj = scene.instantiate()
     base_container.add_child.call_deferred(new_obj)
+    # update properties
     for key in props.keys():
       if new_obj.has_method("set_" + str(key)):
         ## Optional: if you have setter methods, use them

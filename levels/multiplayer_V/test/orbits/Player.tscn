@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://crprymwmj5go8"]
+[gd_scene load_steps=8 format=3 uid="uid://crprymwmj5go8"]
 
 [ext_resource type="Script" uid="uid://d1et24bvshacl" path="res://levels/multiplayer_V/test/orbits/client_sync.gd" id="1_5npe3"]
 
@@ -12,8 +12,18 @@ background_mode = 2
 sky = SubResource("Sky_fhuta")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_q34u4"]
-height = 100.0
-radius = 100.0
+height = 5.0
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5npe3"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 0.172549)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o23l3"]
+material = SubResource("StandardMaterial3D_5npe3")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 5.0
 
 [node name="Player" type="Area3D"]
 script = ExtResource("1_5npe3")
@@ -23,7 +33,11 @@ transform = Transform3D(0.396298, -0.262036, 0.879935, -8.67826e-09, 0.958407, 0
 environment = SubResource("Environment_ejukk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999999, -0.00125664, 0, 0.00125664, 0.999999, 0, 0.532174, 3.48994)
 shape = SubResource("CylinderShape3D_q34u4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CylinderMesh_o23l3")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -1,7 +1,5 @@
 extends Node
 
-@onready var sun = $"../sun"
-@onready var spawn = $"../ObjectSpawner"
 
 @export var MAX_DELAY_IN_SEC = 0.2 * 1000
 @export var boxScene : PackedScene
@@ -15,8 +13,8 @@ func _ready():
   pass
   
   
-func _process(delta):
-  if multiplayer.is_server():
+func _process(_delta):
+  if Networking.is_host():
     _spawn_periodically()
   
 func _spawn_periodically( ):

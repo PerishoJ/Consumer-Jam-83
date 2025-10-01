@@ -18,12 +18,14 @@ metadata/_custom_type_script = "uid://bs4mrdpqy64p1"
 
 [node name="Node3D" type="CharacterBody3D"]
 script = ExtResource("1_dfa55")
+speed = 3.0
+dir_chng_period = 2.0
 
-[node name="NetworkSyncField" type="Area3D" parent="."]
+[node name="NetworkSync" type="Area3D" parent="."]
 script = ExtResource("2_5wj74")
 synced_vars = Array[ExtResource("3_6gy81")]([SubResource("Resource_eqw56")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NetworkSyncField"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NetworkSync"]
 shape = SubResource("BoxShape3D_xdxls")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
