@@ -22,6 +22,8 @@ speed = 3.0
 dir_chng_period = 2.0
 
 [node name="NetworkSync" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("2_5wj74")
 synced_vars = Array[ExtResource("3_6gy81")]([SubResource("Resource_eqw56")])
 

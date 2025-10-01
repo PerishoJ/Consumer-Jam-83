@@ -18,12 +18,9 @@ var client_tracked_objects : Dictionary[int , Node] = {}
 var next_update_time: = 0
 
 func _process(_delta):
-  if _should_send_update():
-    print ( "Num Server Tracked Syncs : " + str(server_tracked_synchronizers.size()))
-      
+  if _should_send_update():      
     _reset_update_timer()
     var update_chunk = _chunk_updates()
-   # print("chunking updates done:" +str(update_chunk))
     if update_chunk.size()>0:
       send_updates.rpc_id(player_id, update_chunk)
 
@@ -60,7 +57,6 @@ func _get_camera_direction():
   
 @rpc("call_remote","unreliable_ordered")
 func send_updates(update : Array):
-  print("client receiving updates from server")
   for chunk in update:
     if client_tracked_objects.has(chunk["id"]):
       var tracked_obj = client_tracked_objects[chunk["id"]] as NetworkSync
@@ -96,14 +92,13 @@ func _get_scene_root()->Node:
 func despawn(network_id : int ):
   # the object has moved out of interest
   # remove it
-  var rm_obj = client_tracked_objects[network_id]
+  var rm_obj = client_tracked_objects[network_id].get_parent()
   rm_obj.queue_free()
   # and stop tracking updates from it
   client_tracked_objects.erase(network_id)
   pass
 
 func _on_area_entered(sync_node):
-  # print("area entered")
   if multiplayer.is_server():
     if sync_node is NetworkSync:
       # Subscribe to property updates when entering area

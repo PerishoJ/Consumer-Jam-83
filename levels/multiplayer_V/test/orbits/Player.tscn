@@ -26,10 +26,12 @@ bottom_radius = 3.0
 height = 5.0
 
 [node name="Player" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_5npe3")
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(0.396298, -0.262036, 0.879935, -8.67826e-09, 0.958407, 0.285404, -0.918122, -0.113105, 0.379815, 5.5301, 2.98853, 7.96625)
+transform = Transform3D(-4.37114e-08, -0.285688, 0.958323, 0, 0.958323, 0.285688, -1, 1.24878e-08, -4.18896e-08, 9.19925, 2.22159, 4.61172)
 environment = SubResource("Environment_ejukk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
