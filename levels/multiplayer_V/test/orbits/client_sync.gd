@@ -21,7 +21,7 @@ func _process(_delta):
   if _should_send_update():      
     _reset_update_timer()
     var update_chunk = _chunk_updates()
-    if update_chunk.size()>0:
+    if not update_chunk.is_empty():
       send_updates.rpc_id(player_id, update_chunk)
 
 ## how do i pass enough information to find it again?
